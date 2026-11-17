@@ -1,0 +1,60 @@
+/* R01: totes les imatges són quadrades i es retallen amb object-fit: cover
+   (sense deformar-les i sense bandes negres). */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background-color: #f3f4f6;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* R02, R03, R06: Grid d'una columna, 8 px de separació i 16 px de marge.
+   El màxim de 948 px equival a 3 columnes de 300 px + 2 gaps de 8 px
+   + 2 marges de 16 px, de manera que les imatges no superen els 300 px. */
+.gallery {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+  width: 100%;
+  max-width: 948px;
+  margin-inline: auto;
+  padding: 16px;
+}
+
+/* R01: imatge quadrada que omple la cel·la sense estirar-se.
+   R02: cantonades arrodonides de 12 px. */
+.gallery img {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-width: 0;
+  min-height: 0;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 12px;
+  background-color: #e5e7eb;
+}
+
+/* R04: entre 600 px i 839 px, dues columnes. */
+@media (min-width: 600px) {
+  .gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* R05 i R06: a partir de 840 px, tres columnes de 300 px com a màxim. */
+@media (min-width: 840px) {
+  .gallery {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
